@@ -30,14 +30,14 @@ const ContextProvider = (props) => {
     let response;
     if (prompt !== undefined) {
       setRecentPrompt(prompt);
-    response = await runChat(prompt);
+      response = await runChat(prompt);
 
-    setPrevPrompts((prev) => {
-      if (!prev.includes(prompt)) {
-        return [prompt, ...prev];
-      }
-      return prev;
-    });
+      setPrevPrompts((prev) => {
+        if (!prev.includes(prompt)) {
+          return [prompt, ...prev];
+        }
+        return prev;
+      });
     } else {
       setPrevPrompts((prev) => [input, ...prev]);
       setRecentPrompt(input);
@@ -80,7 +80,9 @@ const ContextProvider = (props) => {
   };
 
   return (
-    <ChatContext.Provider value={contextValue}>{props.children}</ChatContext.Provider>
+    <ChatContext.Provider value={contextValue}>
+      {props.children}
+    </ChatContext.Provider>
   );
 };
 
